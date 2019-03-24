@@ -57,10 +57,14 @@ export class OffersService {
     public getOffers(): Promise<Offer[]> {
         return new Promise((resolve, reject) => {
             if (this.status) {
-                resolve(this.offers);
+                setTimeout(() => { resolve(this.offers); }, 3000);
             } else {
                 reject({ statusCode: 404, message: 'not found' });
             }
+        })
+        .then((offers: Offer[]) => {
+            console.log(offers);
+            return offers;
         });
     }
 }
