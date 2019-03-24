@@ -52,7 +52,15 @@ export class OffersService {
         }
     ];
 
-    public getOffers(): Offer[] {
-        return this.offers;
+    private status = true;
+
+    public getOffers(): Promise<Offer[]> {
+        return new Promise((resolve, reject) => {
+            if (this.status) {
+                resolve(this.offers);
+            } else {
+                reject({ statusCode: 404, message: 'not found' });
+            }
+        });
     }
 }
